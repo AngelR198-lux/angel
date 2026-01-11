@@ -1,44 +1,39 @@
 #include <iostream>
+#include "lib.h"
+
+using namespace std;
 
 int main() {
-    double num1, num2;
-    char op;
+    string comando, argumento;
+    
+    cout << "--- Unix Terminal Sim v1.0.0.0 ---" << endl;
 
-    std::cout << "Ingrese el primer numero: ";
-    std::cin >> num1;
+    while (true) {
+        cout << obtenerRuta(actual) << "> ";
+        cin >> comando;
 
-    std::cout << "Ingrese el operador (+, -, *, /): ";
-    std::cin >> op;
-
-    std::cout << "Ingrese el segundo numero: ";
-    std::cin >> num2;
-
-    double result;
-
-    switch (op) {
-        case '+':
-            result = num1 + num2;
+        if (comando == "exit") {
             break;
-        case '-':
-            result = num1 - num2;
-            break;
-        case '*':
-            result = num1 * num2;
-            break;
-        case '/':
-            if (num2 != 0) {
-                result = num1 / num2;
-            } else {
-                std::cout << "Error: Division por cero." << std::endl;
-                return 1;
-            }
-            break;
-        default:
-            std::cout << "Operador invalido." << std::endl;
-            return 1;
+        } 
+        else if (comando == "ls") {
+            listar();
+        } 
+        else if (comando == "mkdir") {
+            cin >> argumento;
+            crearEntrada(argumento, true);
+        } 
+        else if (comando == "touch") {
+            cin >> argumento;
+            crearEntrada(argumento, false);
+        } 
+        else if (comando == "cd") {
+            cin >> argumento;
+            cambiarDirectorio(argumento);
+        }
+        else {
+            cout << "Comando no reconocido." << endl;
+        }
     }
-
-    std::cout << "Resultado: " << result << std::endl;
 
     return 0;
 }
